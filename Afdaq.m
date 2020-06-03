@@ -57,14 +57,13 @@ function Afdaq_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 guidata(hObject, handles);
 
-
 evalin('base','clear');
 clc
 format;
 
-%set(handles.figure1,'Position', [0 0.2 0.8 0.8]);
+set(handles.figure1,'Position', [0 0 0.7 0.7]);
 
-set(findall(handles.figure1,'-property','FontUnits'),'FontUnits','normalized');
+%set(findall(handles.figure1,'-property','FontUnits'),'FontUnits','normalized');
 
 
 DefaultSettings(handles);
@@ -97,56 +96,35 @@ function togglebutton_action_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of togglebutton_action
-
-
-%try
-
-u = udp('127.0.0.1',8000);
-fopen(u);
-
+% try
+% u = udp('127.0.0.1',8000);
+% fopen(u);
 actionButtonState = get(hObject,'Value');
-
 if actionButtonState == get(hObject,'Max')
-    
     InitializeVariables(handles);
     ard = getappdata(handles.figure1,'settings_ard');
-
-    %  profile on
+   %  profile on
     % initializing some of the variables to be used in the loop
     timeInterval = getappdata(handles.figure1,'settings_samplingTimeInterval');
     sessionDuration = getappdata(handles.figure1,'settings_sessionDuration');
     numberOfSamples = getappdata(handles.figure1,'settings_numberOfSamples');
-    sampleNumber = nan(1, numberOfSamples);
-    timeStampsMsec = nan(1, numberOfSamples);
-    rawDataChannel1 = uint16(nan(1, numberOfSamples));
-    rawDataChannel2 = uint16(nan(1, numberOfSamples));
-    rawDataChannel3 = uint16(nan(1, numberOfSamples));
-    rawDataChannel4 = uint16(nan(1, numberOfSamples));
-    rawDataChannel5 = uint16(nan(1, numberOfSamples));
-    scaledDataChannel1 = nan(1, numberOfSamples);
-    
-    timeJitterDiff = uint16(nan(1, numberOfSamples));      
-    
-    samplingFrequency = getappdata(handles.figure1,'settings_samplingFrequency');
-        
+    rawDataChannel1Sample = NaN;
+    rawDataChannel2Sample = NaN;
+    rawDataChannel3Sample = NaN;
+    rawDataChannel4Sample = NaN;
+    rawDataChannel5Sample = NaN;
+    scaledDataChannel1Sample = NaN;
     isDataScaling =  getappdata(handles.figure1,'flags_isDataScaling');
-    isBenchmarkRunning =   getappdata(handles.figure1,'flags_isBenchmarkRunning');
-    
-    
+     
     if(isDataScaling)
         scalingFunction = getappdata(handles.figure1,'settings_scalingFunction');
-        scalingFunction = strrep(scalingFunction,'X','rawDataSampleChannel1');
+        scalingFunction = strrep(scalingFunction,'X','rawDataChannel1Sample');
         scalingFunction = char(scalingFunction);
     end
     
-    
     scrollPlotWidth = getappdata(handles.figure1,'setting_scrollPlotWidth');
     rightOffset = getappdata(handles.figure1,'settings_rightOffset');
-        
     count = 0;
-    lCount = 1;
-    overruns = 0;
-    
     isChannel1Running = getappdata(handles.figure1,'flags_isChannel1Running');
     isChannel2Running = getappdata(handles.figure1,'flags_isChannel2Running');
     isChannel3Running = getappdata(handles.figure1,'flags_isChannel3Running');
@@ -166,8 +144,9 @@ if actionButtonState == get(hObject,'Max')
     
     numberOfActiveChannels =  NumberOfActiveChannels(handles);
     setappdata(handles.figure1,'settings_numberOfChannels',numberOfActiveChannels);
-    
+    cla(handles.axes1);
     dcBias = 0;
+    
     if(isChannel1Running)
         if(strcmp(channel1Type,'AnalogInput'))
             configurePin(ard,channel1Pin,channel1Type);
@@ -177,10 +156,9 @@ if actionButtonState == get(hObject,'Max')
             dcBiasChannel1 = dcBias;
             dcBias = dcBias + 200;
         end
+        animatedlineHandle1 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0 0.4470 0.7410]);
     end
-    
     if(isChannel2Running)
-        
         if(strcmp(channel2Type,'AnalogInput'))
             configurePin(ard,channel2Pin,channel2Type);
         elseif(strcmp(channel2Type,'DigitalInput'))
@@ -189,8 +167,8 @@ if actionButtonState == get(hObject,'Max')
             dcBiasChannel2 = dcBias;
             dcBias = dcBias + 200;
         end
+        animatedlineHandle2 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0.8500 0.3250 0.0980]);
     end
-    
     if(isChannel3Running)
         if(strcmp(channel3Type,'AnalogInput'))
             configurePin(ard,channel3Pin,channel3Type);
@@ -200,8 +178,8 @@ if actionButtonState == get(hObject,'Max')
             dcBiasChannel3 = dcBias;
             dcBias = dcBias + 200;
         end
+        animatedlineHandle3 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0.9290 0.6940 0.1250]);
     end
-    
     if(isChannel4Running)
         if(strcmp(channel4Type,'AnalogInput'))
             configurePin(ard,channel4Pin,channel4Type);
@@ -211,8 +189,8 @@ if actionButtonState == get(hObject,'Max')
             dcBiasChannel4 = dcBias;
             dcBias = dcBias + 200;
         end
+        animatedlineHandle4 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0.4940 0.1840 0.5560]);
     end
-    
     if(isChannel5Running)
         if(strcmp(channel5Type,'AnalogInput'))
             configurePin(ard,channel5Pin,channel5Type);
@@ -220,303 +198,277 @@ if actionButtonState == get(hObject,'Max')
             configurePin(ard,channel5Pin,channel5Type);
             configurePin(ard,channel5Pin,'pullup');
             dcBiasChannel5 = dcBias;
-            %dcBias = dcBias + 200;
         end
+        animatedlineHandle5 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0.4660 0.6740 0.1880]);
     end
     
-    if(numberOfActiveChannels>1)
-        hold( handles.axes1, 'on' );
-    end
-    
-    hold( handles.axes1, 'on' );
-    cla(handles.axes1);
-    
-    if(isChannel1Running)
-        plotHandle1 = plot(handles.axes1,timeStampsMsec,rawDataChannel1,'LineWidth',0.25,'Color',[1 0 0]);
-    end
-    if(isChannel2Running)
-        plotHandle2 = plot(handles.axes1,timeStampsMsec,rawDataChannel2,'LineWidth',0.25,'Color',[0 0 1]);
-    end
-    if(isChannel3Running)
-        plotHandle3 = plot(handles.axes1,timeStampsMsec,rawDataChannel3,'LineWidth',0.25,'Color',[0 1 0]);
-    end
-    if(isChannel4Running)
-        plotHandle4 = plot(handles.axes1,timeStampsMsec,rawDataChannel4,'LineWidth',0.25,'Color',[1 0 0]);
-    end
-    if(isChannel5Running)
-        plotHandle5 = plot(handles.axes1,timeStampsMsec,rawDataChannel5,'LineWidth',0.25,'Color',[1 0 1]);
-    end
-    
-    plotHandle6 = plot(handles.axes1,timeStampsMsec,timeJitterDiff,'LineWidth',0.25,'Color',[0 0 0]);
-      
+    animatedlineHandle6 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0 0 0]);
     AcqRunningGuiFormat(handles);
-    
     timeIntervalUs = timeInterval * 10^6;
     timeJitterUs = 0;
-    
-     
+    timer_buttonUpdate = tic;
     tic;
     timeSample = toc*10^6;
     
+    TJ_Work = NaN(1,numberOfSamples);
+    TJ_Pause = NaN(1,numberOfSamples);
+    
     % profile on
     while(actionButtonState && (toc <= sessionDuration) )
-        
-        
+        if(count > 0)
+        tPause = tic; % benchmark
+        end
         while( ((toc*10^6) - timeSample) < (timeIntervalUs - timeJitterUs) )
             % disp('wasting time')
+            % drawnow limitrate
             pause(0);
         end
         
+        if(count > 0)
+        TJ_Pause(count) = toc(tPause)*1000;
+        end
+       tWork = tic; % benchmark
+       
         count = count + 1;
         timeSample = toc*10^6;
-               
+        
         if(isChannel1Running)
             if(strcmp(channel1Type,'AnalogInput'))
-                rawDataChannel1(count) = readVoltage(ard, channel1Pin) * (1023/5);
+                rawDataChannel1Sample = readVoltage(ard, channel1Pin) * (1023/5);
             elseif(strcmp(channel1Type,'DigitalInput'))
-                rawDataChannel1(count) = (1 - readDigitalPin(ard,channel1Pin)) * (150) + dcBiasChannel1;
+                rawDataChannel1Sample = (1 - readDigitalPin(ard,channel1Pin)) * (150) + dcBiasChannel1;
             end
         end
-        
         if(isChannel2Running)
             if(strcmp(channel2Type,'AnalogInput'))
-                rawDataChannel2(count) = readVoltage(ard, channel2Pin) * (1023/5);
+                rawDataChannel2Sample = readVoltage(ard, channel2Pin) * (1023/5);
             elseif(strcmp(channel2Type,'DigitalInput'))
-                rawDataChannel2(count) = (1 - readDigitalPin(ard,channel2Pin)) * (150) + dcBiasChannel2;
+                rawDataChannel2Sample = (1 - readDigitalPin(ard,channel2Pin)) * (150) + dcBiasChannel2;
             end
         end
-        
         if(isChannel3Running)
             if(strcmp(channel3Type,'AnalogInput'))
-                rawDataChannel3(count) = readVoltage(ard, channel3Pin) * (1023/5);
+                rawDataChannel3Sample = readVoltage(ard, channel3Pin) * (1023/5);
             elseif(strcmp(channel3Type,'DigitalInput'))
-                rawDataChannel3(count) = (1 - readDigitalPin(ard,channel3Pin)) * (150) + dcBiasChannel3;
+                rawDataChannel3Sample = (1 - readDigitalPin(ard,channel3Pin)) * (150) + dcBiasChannel3;
             end
         end
-        
         if(isChannel4Running)
             if(strcmp(channel4Type,'AnalogInput'))
-                rawDataChannel4(count) = readVoltage(ard, channel4Pin) * (1023/5);
+                rawDataChannel4Sample = readVoltage(ard, channel4Pin) * (1023/5);
             elseif(strcmp(channel4Type,'DigitalInput'))
-                rawDataChannel4(count) = (1 - readDigitalPin(ard,channel4Pin)) * (150) + dcBiasChannel4;
+                rawDataChannel4Sample = (1 - readDigitalPin(ard,channel4Pin)) * (150) + dcBiasChannel4;
             end
         end
-        
         if(isChannel5Running)
             if(strcmp(channel5Type,'AnalogInput'))
-                rawDataChannel5(count) = readVoltage(ard, channel5Pin) * (1023/5);
+                rawDataChannel5Sample = readVoltage(ard, channel5Pin) * (1023/5);
             elseif(strcmp(channel5Type,'DigitalInput'))
-                rawDataChannel5(count) = (1 - readDigitalPin(ard,channel5Pin)) * (150) + dcBiasChannel5;
+                rawDataChannel5Sample = (1 - readDigitalPin(ard,channel5Pin)) * (150) + dcBiasChannel5;
             end
         end
-          
         
-        %timeStampsMsec = timeSample/(10^3);
+         
+        
         timeSampleSec = timeSample/(10^6);
         
-        % filling data in the correponding arrays
-        sampleNumber(count) = count;
-        timeStampsMsec(count) = timeSample/(10^3);
-        
-            
         % Calculating scaled data sample
         if(isDataScaling)
-            scaledDataSampleChannel1 = eval(scalingFunction);
-            scaledDataChannel1(count) = scaledDataSampleChannel1;
+            scaledDataChannel1Sample = eval(scalingFunction);
         end
         
-        isYAxisAutoScale = getappdata(handles.figure1,'flags_isYAxisAutoScale');   
+        isYAxisAutoScale = getappdata(handles.figure1,'flags_isYAxisAutoScale');
         yMinValue = getappdata(handles.figure1,'settings_yMinValue');
         yMaxValue = getappdata(handles.figure1,'settings_yMaxValue');
         
-        
         % setting plot axes property
         if(timeSampleSec > scrollPlotWidth)
-            lCount = lCount + 1;
             
             xMin = timeSampleSec-scrollPlotWidth;
             xMax = timeSampleSec+rightOffset;
-            
-            if(isYAxisAutoScale)
-                if(isDataScaling)
-                    yMin = min(scaledDataChannel1(lCount : count));
-                    yMax = max(scaledDataChannel1(lCount : count));
-                else
-                    yMin = min(rawDataChannel1(lCount : count));
-                    yMax = max(rawDataChannel1(lCount : count));
-                end
-            else
-                yMin = yMinValue;
-                yMax = yMaxValue;
-            end
-         
-         
         else
             % timeSampleSec <= scrollPlotWidth
-            
             xMin = 0;
             xMax = scrollPlotWidth+rightOffset;
-            
-            if(isYAxisAutoScale)
-                if(isDataScaling)
-                    yMin = min(scaledDataChannel1(1 : count));
-                    yMax = max(scaledDataChannel1(1 : count));
-                else
-                    yMin = min(rawDataChannel1(1 : count));
-                    yMax = max(rawDataChannel1(1 : count));
-                end
-            else
-                yMin = yMinValue;
-                yMax = yMaxValue;
-            end
-      
-            
         end
         
-        yMax = yMax + (0.01*yMax);
-        yMin = yMin - (0.01*yMin);
+        if(count == 1)
+           yData = [rawDataChannel1Sample rawDataChannel2Sample rawDataChannel3Sample rawDataChannel5Sample scaledDataChannel1Sample];
+           yMaxTh = max(yData) + 1;
+           yMinTh = min(yData);
+        end
         
+        if(isYAxisAutoScale)
+            yData = [rawDataChannel1Sample rawDataChannel2Sample rawDataChannel3Sample rawDataChannel5Sample scaledDataChannel1Sample];
+            yMinData = min(yData);
+            yMaxData = max(yData);
+            if(yMinData < yMinTh)
+                yMinTh = yMinData;
+            end
+            if(yMaxData > yMaxTh)
+                yMaxTh = yMaxData;
+            end
+            yMin = yMinTh;
+            yMax = yMaxTh;
+        else
+            yMin = yMinValue;
+            yMax = yMaxValue;
+        end
         
-        set(handles.axes1,'xlim',[xMin xMax],'ylim',[yMin yMax]);
+        yMaxOffset = yMax + (0.01*yMax);
+        yMinOffset = yMin - (0.01*yMin);
+        set(handles.axes1,'xlim',[xMin xMax],'ylim',[yMinOffset yMaxOffset]);
         
       
+        
         % Plotting data
-    
         if(isChannel1Running)
             if(isDataScaling)
-                set(plotHandle1,'YData',scaledDataChannel1,'XData',timeStampsMsec/1000);
+                addpoints(animatedlineHandle1, timeSampleSec,scaledDataChannel1Sample);
             else
-                set(plotHandle1,'YData',rawDataChannel1,'XData',timeStampsMsec/1000);
+                addpoints(animatedlineHandle1, timeSampleSec,rawDataChannel1Sample);
             end
         end
         if(isChannel2Running)
-            set(plotHandle2,'YData',rawDataChannel2,'XData',timeStampsMsec/1000);
+            addpoints(animatedlineHandle2, timeSampleSec,rawDataChannel2Sample);
         end
         if(isChannel3Running)
-            set(plotHandle3,'YData',rawDataChannel3,'XData',timeStampsMsec/1000);
+            addpoints(animatedlineHandle3, timeSampleSec,rawDataChannel3Sample);
         end
         if(isChannel4Running)
-            set(plotHandle4,'YData',rawDataChannel4,'XData',timeStampsMsec/1000);
+            addpoints(animatedlineHandle4, timeSampleSec,rawDataChannel4Sample);
         end
         if(isChannel5Running)
-            set(plotHandle5,'YData',rawDataChannel5,'XData',timeStampsMsec/1000);
-        end
-     
-        
-         % timeJitterDiff(count) = timeStampsMsec(count) - (count*(1000/samplingFrequency));
-        if(count > 1)
-             timeJitterDiff(count) = timeStampsMsec(count) - timeStampsMsec(count-1);
-             set(plotHandle6,'YData',timeJitterDiff,'XData',timeStampsMsec/1000);
+            addpoints(animatedlineHandle5, timeSampleSec,rawDataChannel5Sample);
         end
         
+         
        % oscsend(u,'/oscValue','i',rawDataChannel1(count));
-      
-             
-       timeJitterUs = timeSample - (timeIntervalUs*(count));
        
+       % time_buttonUpdate = toc(timer_buttonUpdate); % check timer
+       % if time_buttonUpdate > (1)
        actionButtonState = get(hObject,'Value');
-       drawnow;
+       
+       
+       drawnow limitrate
+       
+       %  drawnow limitrate
+       %     timer_buttonUpdate = tic; % reset timer after updating
+       % end
+       
+        timeJitterUs = timeSample - (timeIntervalUs*(count));
+        
+        TJ_Work(count) = toc(tWork)*1000;
        
     end
     
-    
-   %  profile viewer
+
+    % profile viewer
     % Saving data in the application data handle
-    
     recordedNumberOfSamples = count;
-    
-    %         assignin('base','data_sampleNumber',sampleNumber);
-    %         assignin('base','data_timeStampsMsec',timeStampsMsec);
-    %         assignin('base','data_rawDataChannel1',rawDataChannel1);
-    
-    
-    sampleNumber = sampleNumber(1:recordedNumberOfSamples);
-    timeStampsMsec = round(timeStampsMsec(1:recordedNumberOfSamples),0);
+    % assignin('base','data_sampleNumber',sampleNumber);
+    sampleNumber = 1:1:recordedNumberOfSamples;
+    [timeStampsMsec, ~] = getpoints(animatedlineHandle1);
+    timeStampsMsec = round(timeStampsMsec*1000,0);
     
     setappdata(handles.figure1,'data_sampleNumber',sampleNumber);
     setappdata(handles.figure1,'data_timeStampsMsec',timeStampsMsec);
     setappdata(handles.figure1,'data_recordedNumberOfSamples',recordedNumberOfSamples);
     
-    
     dcBias = 0;
-        
     if(isChannel1Running)
-        if(strcmp(channel1Type,'AnalogInput'))
-          rawDataChannel1 = rawDataChannel1(1:recordedNumberOfSamples); 
-          setappdata(handles.figure1,'data_rawDataChannel1',rawDataChannel1);
-        elseif(strcmp(channel1Type,'DigitalInput'))
+        %  rawDataChannel1 = rawDataChannel1(1:recordedNumberOfSamples);
+        [~ ,rawDataChannel1] = getpoints(animatedlineHandle1);
+        if(strcmp(channel1Type,'DigitalInput'))
             dcBiasChannel1 = dcBias;
             dcBias = dcBias + 200;
             rawDataChannel1 = (rawDataChannel1 - dcBiasChannel1)/150;
-            setappdata(handles.figure1,'data_rawDataChannel1',rawDataChannel1);
         end
+        setappdata(handles.figure1,'data_rawDataChannel1',rawDataChannel1);
     end
     if(isChannel2Running)
-        if(strcmp(channel2Type,'AnalogInput'))
-          rawDataChannel2 = rawDataChannel2(1:recordedNumberOfSamples); 
-          setappdata(handles.figure1,'data_rawDataChannel2',rawDataChannel2);
-        elseif(strcmp(channel2Type,'DigitalInput'))
+        %  rawDataChannel2 = rawDataChannel2(1:recordedNumberOfSamples);
+        [~ ,rawDataChannel2] = getpoints(animatedlineHandle2);
+        if(strcmp(channel2Type,'DigitalInput'))
             dcBiasChannel2 = dcBias;
             dcBias = dcBias + 200;
             rawDataChannel2 = (rawDataChannel2 - dcBiasChannel2)/150;
-            setappdata(handles.figure1,'data_rawDataChannel2',rawDataChannel2);
         end
+        setappdata(handles.figure1,'data_rawDataChannel2',rawDataChannel2);
     end
     if(isChannel3Running)
-        if(strcmp(channel3Type,'AnalogInput'))
-           rawDataChannel3 = rawDataChannel3(1:recordedNumberOfSamples); 
-           setappdata(handles.figure1,'data_rawDataChannel3',rawDataChannel3);
-        elseif(strcmp(channel3Type,'DigitalInput'))
+        %  rawDataChannel3 = rawDataChannel3(1:recordedNumberOfSamples);
+        [~ ,rawDataChannel3] = getpoints(animatedlineHandle3);
+        if(strcmp(channel3Type,'DigitalInput'))
             dcBiasChannel3 = dcBias;
             dcBias = dcBias + 200;
             rawDataChannel3 = (rawDataChannel3 - dcBiasChannel3)/150;
-            setappdata(handles.figure1,'data_rawDataChannel3',rawDataChannel3);
         end
+        setappdata(handles.figure1,'data_rawDataChannel3',rawDataChannel3);
     end
     if(isChannel4Running)
-        if(strcmp(channel4Type,'AnalogInput'))
-            rawDataChannel4 = rawDataChannel4(1:recordedNumberOfSamples); 
-            setappdata(handles.figure1,'data_rawDataChannel4',rawDataChannel4);
-        elseif(strcmp(channel4Type,'DigitalInput'))
+        % rawDataChannel4 = rawDataChannel4(1:recordedNumberOfSamples);
+        [~ ,rawDataChannel4] = getpoints(animatedlineHandle4);
+        if(strcmp(channel4Type,'DigitalInput'))
             dcBiasChannel4 = dcBias;
             dcBias = dcBias + 200;
             rawDataChannel4 = (rawDataChannel4 - dcBiasChannel4)/150;
-            setappdata(handles.figure1,'data_rawDataChannel4',rawDataChannel4);
         end
+        setappdata(handles.figure1,'data_rawDataChannel4',rawDataChannel4);
     end
     if(isChannel5Running)
-        if(strcmp(channel5Type,'AnalogInput'))
-            rawDataChannel5 = rawDataChannel5(1:recordedNumberOfSamples); 
-            setappdata(handles.figure1,'data_rawDataChannel5',rawDataChannel5);
-        elseif(strcmp(channel5Type,'DigitalInput'))
+        %   rawDataChannel5 = rawDataChannel5(1:recordedNumberOfSamples);
+        [~ ,rawDataChannel5] = getpoints(animatedlineHandle5);
+        if(strcmp(channel5Type,'DigitalInput'))
             dcBiasChannel5 = dcBias;
             rawDataChannel5 = (rawDataChannel5 - dcBiasChannel5)/150;
-            setappdata(handles.figure1,'data_rawDataChannel5',rawDataChannel5);
         end
+        setappdata(handles.figure1,'data_rawDataChannel5',rawDataChannel5);
     end
     
     if(isDataScaling)
-         scaledDataChannel1 = scaledDataChannel1(1:recordedNumberOfSamples);
-         setappdata(handles.figure1,'data_scaledDataChannel1',scaledDataChannel1);
+        scalingFx = getappdata(handles.figure1,'settings_scalingFunction');
+        scalingFx = strrep(scalingFx,'X','rawDataChannel1');
+        scalingFx= char(scalingFx);
+        scaledDataChannel1 = eval(scalingFx);
+        setappdata(handles.figure1,'data_scaledDataChannel1',scaledDataChannel1);
     end
     
- 
+    % [~ ,time_a] = getpoints(animatedlineHandle6);
+    % figure()
+    % plot(time_a)
     
+        
+         assignin('base','data_timeStampsMsec',timeStampsMsec);
+         
+                  
+         
+         clc
+         TJ_Work = TJ_Work(1:count);
+         TJ_Pause = TJ_Pause(1:count);
+         assignin('base','TJ_Work',TJ_Work);
+         assignin('base','TJ_Pause',TJ_Pause);
+         figure()
+         hold on
+         plot(TJ_Work,'Color', [1 0 0])
+         plot(TJ_Pause,'Color', [0 0 1])
+         plot(TJ_Work + TJ_Pause,'Color', [0 0 0])
+         
+         T_M = table(TJ_Work', TJ_Pause', (TJ_Work+TJ_Pause)', 'VariableNames',{'Work','Pause','Sum'})
 
-%     assignin('base','data_timeStampsMsec',timeStampsMsec);
-%     assignin('base','data_rawDataChannel1',rawDataChannel1);
-%     assignin('base','data_rawDataChannel2',rawDataChannel2);
-%     assignin('base','data_rawDataChannel3',rawDataChannel3);
-%     assignin('base','data_rawDataChannel4',rawDataChannel4);
-%     assignin('base','data_rawDataChannel5',rawDataChannel5);
-%     assignin('base','data_scaledDataChannel1',scaledDataChannel1);
-%     assignin('base','data_scaledDataChannel1',hrIBI);
+         
+        % mean(TJ_ben)
+        % median(TJ_ben)
+        % mode(TJ_ben)
+        % figure()
+        % plot(TJ_ben)
+        % figure()
+        % histogram(TJ_ben,count)
+        % figure()
+        % boxplot(TJ_ben)
     
-    %figure
-    %plot(diff(timeStampsMsec)-timeInterval)
-    
-    %   data = [sampleNumber; timeStampsMsec; rawData];
-    %   data = data';
+    %     assignin('base','data_rawDataChannel1',rawDataChannel1);
+    %     assignin('base','data_rawDataChannel2',rawDataChannel2);
     
     AcqStoppedGuiFormat(handles);
     CalculateResults(handles)
@@ -540,10 +492,8 @@ end
 %         otherwise
 %              disp(ME.identifier)
 %              disp('Unknown error !!!');
-%end
-
-
-
+%     end
+% end
 
 
 % --- Executes on button press in pushbutton_exit.
@@ -822,7 +772,11 @@ set(handles.output,'InvertHardcopy','off');
 
 print -dmeta %-pdf
 
-disp('Snapshot copied to clipboard...');
+% Displaying status message
+string = 'Snapshot copied to clipboard...';
+color = [0 0.38 0.11];
+set(handles.text_statusMsg, 'String', string);
+set(handles.text_statusMsg, 'ForegroundColor', color);
 
 
 
@@ -1154,7 +1108,7 @@ switch val
         set(handles.checkbox_scalingFunction,'Value',0);
         checkbox_scalingFunction_Callback(handles.checkbox_scalingFunction, eventdata, handles);
         set(handles.checkbox_scalingFunction,'Enable','off');
-                   
+        
     case 2
         setappdata(handles.figure1,'settings_channel1Type','AnalogInput');
         setappdata(handles.figure1,'settings_channel1Pin','A0');
@@ -1606,16 +1560,16 @@ function checkbox_yAxisAutoScale_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of checkbox_yAxisAutoScale
 value = get(hObject,'Value');
 if (value)
- setappdata(handles.figure1,'flags_isYAxisAutoScale', true);   
- set(handles.edit_yMaxValue,'Enable','off');  
- set(handles.edit_yMinValue,'Enable','off');   
- set(handles.pushbutton_yAxisSet,'Enable','off');  
- set(handles.pushbutton_yAxisReset,'Enable','off');  
- 
+    setappdata(handles.figure1,'flags_isYAxisAutoScale', true);
+    set(handles.edit_yMaxValue,'Enable','off');
+    set(handles.edit_yMinValue,'Enable','off');
+    set(handles.pushbutton_yAxisSet,'Enable','off');
+    set(handles.pushbutton_yAxisReset,'Enable','off');
+    
 else
- setappdata(handles.figure1,'flags_isYAxisAutoScale', false);   
- set(handles.edit_yMaxValue,'Enable','on');  
- set(handles.edit_yMinValue,'Enable','on');  
- set(handles.pushbutton_yAxisSet,'Enable','on');  
- set(handles.pushbutton_yAxisReset,'Enable','on');   
+    setappdata(handles.figure1,'flags_isYAxisAutoScale', false);
+    set(handles.edit_yMaxValue,'Enable','on');
+    set(handles.edit_yMinValue,'Enable','on');
+    set(handles.pushbutton_yAxisSet,'Enable','on');
+    set(handles.pushbutton_yAxisReset,'Enable','on');
 end

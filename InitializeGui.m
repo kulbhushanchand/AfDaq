@@ -3,10 +3,6 @@ function InitializeGui(eventdata,handles)
 %   Detailed explanation goes here
 
 
-
-
-
-
 %% Initialize plot properties.
 
 % this part is to intitialize the plot so as to have a correct layout in
@@ -23,17 +19,23 @@ xMin = 0;
 xMax = scrollPlotWidth+rightOffset;
 yMin = 0;
 yMax = 1024;
-set(handles.axes1,'XGrid','on');
-set(handles.axes1,'XMinorGrid','on');
-set(handles.axes1,'YGrid','on');
-set(handles.axes1,'YMinorGrid','on');
+set(handles.axes1,'XGrid','on',...
+    'XMinorGrid','on',...
+    'YGrid','on',...
+    'YMinorGrid','on',...
+    'XMinorTick','on',...
+    'YMinorTick','on',...
+    'GridColorMode','manual',...
+    'GridColor',[0.4 0.6 0.7],...
+    'FontSize',8,...
+    'XLimMode','manual',...
+    'YLimMode','manual',...
+    'xlim',[xMin xMax],...
+    'ylim',[yMin yMax]);
+
 %title(handles.axes1,'Arduino Serial Data Acquisition','interpreter','latex');
-xlabel(handles.axes1,'Elapsed Time (s)','interpreter','latex');
-ylabel(handles.axes1,'Raw Sensor Reading','interpreter','latex');
-set(handles.axes1,'XLimMode','manual','YLimMode','manual');
-set(handles.axes1,'xlim',[xMin xMax],'ylim',[yMin yMax]);
-
-
+xlabel(handles.axes1,'Elapsed Time (s)','FontSize',8);
+ylabel(handles.axes1,'Raw Sensor Reading','FontSize',8);
 
 
 %% Initialize panel properties.

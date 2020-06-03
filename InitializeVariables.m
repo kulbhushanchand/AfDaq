@@ -66,9 +66,6 @@ else
     secondValue = num2str(secondValue);
 end
 
-millisecValue = round((daqDateTime.Second - secondValue)*1000);
-millisecValue = num2str(millisecValue);
-
 
 sessionId  = sprintf('%s%s%s%s%s%s%s', yearValue, monthValue, dateValue, hourValue, minuteValue, secondValue,customId);
 setappdata(handles.figure1,'settings_sessionId',sessionId);
@@ -101,9 +98,6 @@ if(isDataScaling)
  scalingFunction = get(handles.edit_scalingFunction,'String');
  setappdata(handles.figure1,'settings_scalingFunction',scalingFunction);
 end
-
-% YAxis Autoscale
-isYAxisAutoScale = getappdata(handles.figure1,'flags_isYAxisAutoScale');
 
 
 % Number of samples to be recorded 
