@@ -158,6 +158,9 @@ if actionButtonState == get(hObject,'Max')
         end
         animatedlineHandle1 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0 0.4470 0.7410]);
     end
+    if(isDataScaling)
+        animatedlineHandle1_s = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0 0 0]);
+    end
     if(isChannel2Running)
         if(strcmp(channel2Type,'AnalogInput'))
             configurePin(ard,channel2Pin,channel2Type);
@@ -202,32 +205,32 @@ if actionButtonState == get(hObject,'Max')
         animatedlineHandle5 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0.4660 0.6740 0.1880]);
     end
     
-    animatedlineHandle6 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0 0 0]);
+  %  animatedlineHandle6 = animatedline(handles.axes1,'LineWidth',1.5,'Color',[0 0 0]);
     AcqRunningGuiFormat(handles);
     timeIntervalUs = timeInterval * 10^6;
     timeJitterUs = 0;
-    timer_buttonUpdate = tic;
+%    timer_buttonUpdate = tic;
     tic;
     timeSample = toc*10^6;
     
-    TJ_Work = NaN(1,numberOfSamples);
-    TJ_Pause = NaN(1,numberOfSamples);
+ %   TJ_Work = NaN(1,numberOfSamples);
+ %   TJ_Pause = NaN(1,numberOfSamples);
     
     % profile on
     while(actionButtonState && (toc <= sessionDuration) )
-        if(count > 0)
-        tPause = tic; % benchmark
-        end
+   %     if(count > 0)
+   %     tPause = tic; % benchmark
+   %     end
         while( ((toc*10^6) - timeSample) < (timeIntervalUs - timeJitterUs) )
             % disp('wasting time')
             % drawnow limitrate
             pause(0);
         end
         
-        if(count > 0)
-        TJ_Pause(count) = toc(tPause)*1000;
-        end
-       tWork = tic; % benchmark
+    %    if(count > 0)
+    %    TJ_Pause(count) = toc(tPause)*1000;
+    %    end
+    %   tWork = tic; % benchmark
        
         count = count + 1;
         timeSample = toc*10^6;
@@ -323,11 +326,10 @@ if actionButtonState == get(hObject,'Max')
         
         % Plotting data
         if(isChannel1Running)
-            if(isDataScaling)
-                addpoints(animatedlineHandle1, timeSampleSec,scaledDataChannel1Sample);
-            else
-                addpoints(animatedlineHandle1, timeSampleSec,rawDataChannel1Sample);
-            end
+            addpoints(animatedlineHandle1, timeSampleSec,rawDataChannel1Sample);
+        end
+        if(isDataScaling)
+            addpoints(animatedlineHandle1_s, timeSampleSec,scaledDataChannel1Sample);
         end
         if(isChannel2Running)
             addpoints(animatedlineHandle2, timeSampleSec,rawDataChannel2Sample);
@@ -358,7 +360,7 @@ if actionButtonState == get(hObject,'Max')
        
         timeJitterUs = timeSample - (timeIntervalUs*(count));
         
-        TJ_Work(count) = toc(tWork)*1000;
+   %     TJ_Work(count) = toc(tWork)*1000;
        
     end
     
@@ -434,27 +436,28 @@ if actionButtonState == get(hObject,'Max')
         setappdata(handles.figure1,'data_scaledDataChannel1',scaledDataChannel1);
     end
     
+   
+       
+    
     % [~ ,time_a] = getpoints(animatedlineHandle6);
     % figure()
     % plot(time_a)
     
         
-         assignin('base','data_timeStampsMsec',timeStampsMsec);
-         
-                  
-         
-         clc
-         TJ_Work = TJ_Work(1:count);
-         TJ_Pause = TJ_Pause(1:count);
-         assignin('base','TJ_Work',TJ_Work);
-         assignin('base','TJ_Pause',TJ_Pause);
-         figure()
-         hold on
-         plot(TJ_Work,'Color', [1 0 0])
-         plot(TJ_Pause,'Color', [0 0 1])
-         plot(TJ_Work + TJ_Pause,'Color', [0 0 0])
-         
-         T_M = table(TJ_Work', TJ_Pause', (TJ_Work+TJ_Pause)', 'VariableNames',{'Work','Pause','Sum'})
+%          assignin('base','data_timeStampsMsec',timeStampsMsec);
+%        
+%          clc
+%          TJ_Work = TJ_Work(1:count);
+%          TJ_Pause = TJ_Pause(1:count);
+%          assignin('base','TJ_Work',TJ_Work);
+%          assignin('base','TJ_Pause',TJ_Pause);
+%          figure()
+%          hold on
+%          plot(TJ_Work,'Color', [1 0 0])
+%          plot(TJ_Pause,'Color', [0 0 1])
+%          plot(TJ_Work + TJ_Pause,'Color', [0 0 0])
+%          
+%          T_M = table(TJ_Work', TJ_Pause', (TJ_Work+TJ_Pause)', 'VariableNames',{'Work','Pause','Sum'})
 
          
         % mean(TJ_ben)
@@ -550,7 +553,7 @@ function pushbutton_log_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-string = 'Data Logging - Initiated';
+string = 'Data Logging - in process...';
 color = [0.94 0 0];
 set(handles.text_statusMsg, 'String', string);
 set(handles.text_statusMsg, 'ForegroundColor', color);
@@ -626,7 +629,7 @@ rawDataChannel4 = getappdata(handles.figure1,'data_rawDataChannel4');
 rawDataChannel5 = getappdata(handles.figure1,'data_rawDataChannel5');
 scaledDataChannel1 = getappdata(handles.figure1,'data_scaledDataChannel1');
 
-data = [sampleNumber' timeStampsMsec' rawDataChannel1' rawDataChannel2' rawDataChannel3' rawDataChannel4' rawDataChannel5' scaledDataChannel1'];
+data = [sampleNumber' timeStampsMsec' rawDataChannel1' rawDataChannel2' rawDataChannel3' rawDataChannel4' rawDataChannel5'];
 %dataCell = num2cell(data);
 %dataCell(isnan(data)) ={'NaN'};
 
@@ -643,62 +646,71 @@ data = [sampleNumber' timeStampsMsec' rawDataChannel1' rawDataChannel2' rawDataC
 %     end
 % end
 
-
-col_header(1,3) = {'Arduino Serial Data Acquisition'};
-col_header([3:21],1)={'DAQ Settings',...
-    'Serial Port of Arduino',...
-    'Arduino Model'...
-    'Custom ID'...
-    'Session ID'...
-    'Session Date'...
-    'Session Time'...
-    'Session Duration (sec)'...
-    'Sampling Frequency (Hz)'...
-    'Sampling Time Interval (msec)'...
-    'Number of Samples to be Recorded'...
-    'Scroll Plot Width (sec)'...
-    'Scaling Function',...
-    'Number of Channels',...
-    'Channel 1',...
-    'Channel 2',...
-    'Channel 3',...
-    'Channel 4',...
-    'Channel 5'};
-
-col_header([3:7],4)={'DAQ Results',...
-    'Recorded Session Duration (sec)',...
-    'Recorded Sampling Frequency (Hz)'...
-    'Recorded Number of Samples'...
-    'Session recording %age'};
-col_header(23,[1:8]) = {'Sample Number','Time Stamps (msec)','Raw Sensor Data - Channel 1','Raw Sensor Data - Channel 2','Raw Sensor Data - Channel 3','Raw Sensor Data - Channel 4','Raw Sensor Data - Channel 5','Scaled Sensor Data'};
+% 
+% col_header(1,3) = {'Arduino Serial Data Acquisition'};
+% col_header([3:21],1)={'DAQ Settings',...
+%     'Serial Port of Arduino',...
+%     'Arduino Model'...
+%     'Custom ID'...
+%     'Session ID'...
+%     'Session Date'...
+%     'Session Time'...
+%     'Session Duration (sec)'...
+%     'Sampling Frequency (Hz)'...
+%     'Sampling Time Interval (msec)'...
+%     'Number of Samples to be Recorded'...
+%     'Scroll Plot Width (sec)'...
+%     'Scaling Function',...
+%     'Number of Channels',...
+%     'Channel 1',...
+%     'Channel 2',...
+%     'Channel 3',...
+%     'Channel 4',...
+%     'Channel 5'};
+% 
+% col_header([3:7],4)={'DAQ Results',...
+%     'Recorded Session Duration (sec)',...
+%     'Recorded Sampling Frequency (Hz)'...
+%     'Recorded Number of Samples'...
+%     'Session recording %age'};
+% col_header(23,[1:8]) = {'Sample Number','Time Stamps (msec)','Raw Sensor Data - Channel 1','Raw Sensor Data - Channel 2','Raw Sensor Data - Channel 3','Raw Sensor Data - Channel 4','Raw Sensor Data - Channel 5','Scaled Sensor Data'};
 
 
 [status, msg, msgID] = mkdir('LoggedData');
 
-
 defname  = num2str(sessionId);
 
-[FileName, PathName] = uiputfile({'*.xlsx';'*.xls'},'Log Data to File...',[defname '.xlsx']);
+FileName = strcat(defname, '.xlsx');
+PathName = strcat(pwd, '\LoggedData\');
+copyfile('LogDataTemplate.xlsx',strcat('LoggedData/', defname, '.xlsx'));
+xlswrite([PathName FileName],DAQ_Settings','Sheet1','B4');     %Write data
+xlswrite([PathName FileName],DAQ_Results','Sheet1','E4');      %Write data
+xlswrite([PathName FileName],data,'Sheet1','A24');             %Write data
+xlswrite([PathName FileName],scaledDataChannel1','Sheet1','H24');             %Write data
 
-if FileName ~=0
-    if exist([PathName FileName],'file')
-        delete([PathName FileName ]);
-    end
-    
-    xlswrite([PathName FileName],col_header,'Sheet1','A1');
-    xlswrite([PathName FileName],DAQ_Settings','Sheet1','B4');     %Write data
-    xlswrite([PathName FileName],DAQ_Results','Sheet1','E4');      %Write data
-    xlswrite([PathName FileName],data,'Sheet1','A24');             %Write data
-    xlsAutoFitCol([PathName FileName],'Sheet1','A:I');
-    xlsfont([PathName FileName],'Sheet1','whole','font','Calibri','size',11);
-    xlsalign([PathName FileName],'Sheet1','C1:E1','MergeCells',1);
-    xlsborder([PathName FileName],'Sheet1','C1','Box',1,3,1);
-    xlsfont([PathName FileName],'Sheet1','C1:E1','size',20,'fontstyle','bold');
-    xlsfont([PathName FileName],'Sheet1','A3:D3','size',11,'fontstyle','bold');
-    xlsfont([PathName FileName],'Sheet1','A23:I23','size',11,'fontstyle','bold');
-    xlsalign([PathName FileName],'Sheet1','B4:B21','Horizontal',4);
-    xlsalign([PathName FileName],'Sheet1','E4:E7','Horizontal',4);
-    
+
+% 
+% [FileName, PathName] = uiputfile({'*.xlsx';'*.xls'},'Log Data to File...',[defname '.xlsx'])
+% 
+% if FileName ~=0
+%     if exist([PathName FileName],'file')
+%         delete([PathName FileName ]);
+%     end
+%     
+%     xlswrite([PathName FileName],col_header,'Sheet1','A1');
+%     xlswrite([PathName FileName],DAQ_Settings','Sheet1','B4');     %Write data
+%     xlswrite([PathName FileName],DAQ_Results','Sheet1','E4');      %Write data
+%     xlswrite([PathName FileName],data,'Sheet1','A24');             %Write data
+%     xlsAutoFitCol([PathName FileName],'Sheet1','A:I');
+%     xlsfont([PathName FileName],'Sheet1','whole','font','Calibri','size',11);
+%     xlsalign([PathName FileName],'Sheet1','C1:E1','MergeCells',1);
+%     xlsborder([PathName FileName],'Sheet1','C1','Box',1,3,1);
+%     xlsfont([PathName FileName],'Sheet1','C1:E1','size',20,'fontstyle','bold');
+%     xlsfont([PathName FileName],'Sheet1','A3:D3','size',11,'fontstyle','bold');
+%     xlsfont([PathName FileName],'Sheet1','A23:I23','size',11,'fontstyle','bold');
+%     xlsalign([PathName FileName],'Sheet1','B4:B21','Horizontal',4);
+%     xlsalign([PathName FileName],'Sheet1','E4:E7','Horizontal',4);
+%     
     %xlswrite('daq_1_channel_data.xlsx',col_header,'Sheet1','A1');     %Write column header
     %xlswrite('daq_1_channel_data.xlsx',row_header,'Sheet1','A2');      %Write row header
     
@@ -707,14 +719,14 @@ if FileName ~=0
     set(handles.text_statusMsg, 'String', string);
     set(handles.text_statusMsg, 'ForegroundColor', color);
     
-else
-    
-    string = 'Data Logging - Cancelled';
-    color = [0 0.38 0.11];
-    set(handles.text_statusMsg, 'String', string);
-    set(handles.text_statusMsg, 'ForegroundColor', color);
-    
-end
+% else
+%     
+%     string = 'Data Logging - Cancelled';
+%     color = [0 0.38 0.11];
+%     set(handles.text_statusMsg, 'String', string);
+%     set(handles.text_statusMsg, 'ForegroundColor', color);
+%     
+% end
 
 
 drawnow
