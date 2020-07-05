@@ -44,7 +44,7 @@ set(findall(handles.uipanel_settings, '-property', 'Enable'), 'Enable', 'on');
 
 
 set(handles.checkbox_scalingFunction,'Value',0);
-Afdaq('checkbox_scalingFunction_Callback',handles.checkbox_scalingFunction, eventdata, handles);
+AfDaq('checkbox_scalingFunction_Callback',handles.checkbox_scalingFunction, eventdata, handles);
 set(handles.checkbox_scalingFunction,'Enable','off');
 
   

@@ -71,7 +71,7 @@ set(handles.text_customId, 'String', string);
 string = sprintf('Recorded Session Duration : %s sec', '.....');
 set(handles.text_recordedSessionDuration, 'String', string);
 
-% Setting text for recorded samplinf frequency
+% Setting text for recorded sampling frequency
 string = sprintf('Recorded Sampling Frequency : %s Hz', '.....');
 set(handles.text_recordedSamplingFrequency, 'String', string);
 

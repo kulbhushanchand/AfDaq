@@ -1,5 +1,5 @@
-function varargout = Afdaq(varargin)
-% AFDAQ MATLAB code for Afdaq.fig
+function varargout = AfDaq(varargin)
+% AFDAQ MATLAB code for AfDaq.fig
 %      AFDAQ, by itself, creates a new AFDAQ or raises the existing
 %      singleton*.
 %
@@ -11,9 +11,9 @@ function varargout = Afdaq(varargin)
 %
 %      AFDAQ('Property','Value',...) creates a new AFDAQ or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before Afdaq_OpeningFcn gets called.  An
+%      applied to the GUI before AfDaq_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to Afdaq_OpeningFcn via varargin.
+%      stop.  All inputs are passed to AfDaq_OpeningFcn via varargin.
 %
 
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
@@ -21,16 +21,16 @@ function varargout = Afdaq(varargin)
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help Afdaq
+% Edit the above text to modify the response to help AfDaq
 
-% Last Modified by GUIDE v2.5 08-May-2019 11:10:12
+% Last Modified by GUIDE v2.5 05-Jul-2020 16:24:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
     'gui_Singleton',  gui_Singleton, ...
-    'gui_OpeningFcn', @Afdaq_OpeningFcn, ...
-    'gui_OutputFcn',  @Afdaq_OutputFcn, ...
+    'gui_OpeningFcn', @AfDaq_OpeningFcn, ...
+    'gui_OutputFcn',  @AfDaq_OutputFcn, ...
     'gui_LayoutFcn',  [] , ...
     'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -45,15 +45,15 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before Afdaq is made visible.
-function Afdaq_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before AfDaq is made visible.
+function AfDaq_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to Afdaq (see VARARGIN)
+% varargin   command line arguments to AfDaq (see VARARGIN)
 
-% Choose default command line output for Afdaq
+% Choose default command line output for AfDaq
 handles.output = hObject;
 guidata(hObject, handles);
 
@@ -61,7 +61,7 @@ evalin('base','clear');
 clc
 format;
 
-set(handles.figure1,'Position', [0 0 0.7 0.7]);
+%set(handles.figure1,'Position', [0.1 0.1 0.7 0.7]);
 
 %set(findall(handles.figure1,'-property','FontUnits'),'FontUnits','normalized');
 
@@ -74,12 +74,12 @@ Arduino(handles,'initialize');
 
 disp('Session Started...');
 
-% UIWAIT makes Afdaq wait for user response (see UIRESUME)
+% UIWAIT makes AfDaq wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Afdaq_OutputFcn(hObject, eventdata, handles)
+function varargout = AfDaq_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -686,8 +686,10 @@ copyfile('LogDataTemplate.xlsx',strcat('LoggedData/', defname, '.xlsx'));
 xlswrite([PathName FileName],DAQ_Settings','Sheet1','B4');     %Write data
 xlswrite([PathName FileName],DAQ_Results','Sheet1','E4');      %Write data
 xlswrite([PathName FileName],data,'Sheet1','A24');             %Write data
-xlswrite([PathName FileName],scaledDataChannel1','Sheet1','H24');             %Write data
 
+if(isDataScaling)
+    xlswrite([PathName FileName],scaledDataChannel1','Sheet1','H24');             %Write data
+end
 
 % 
 % [FileName, PathName] = uiputfile({'*.xlsx';'*.xls'},'Log Data to File...',[defname '.xlsx'])

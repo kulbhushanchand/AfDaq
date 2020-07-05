@@ -7,7 +7,9 @@ switch string
     case 'connect'
         try
             ard = arduino(getappdata(handles.figure1,'settings_serialPort'));
-            %ard = arduino('COM4','Uno','BaudRate',115200);
+          %  ard = arduino('btspp://00211300C09A','Uno');
+            
+           % pause(20);
             setappdata(handles.figure1,'flags_isArduinoConnected',true);
             setappdata(handles.figure1,'settings_ard',ard);
             setappdata(handles.figure1,'settings_ardBoard',ard.Board);
