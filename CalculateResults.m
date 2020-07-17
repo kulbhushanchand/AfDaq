@@ -17,7 +17,7 @@ setappdata(handles.figure1,'data_recordedSamplingFrequency',recordedSamplingFreq
 string = sprintf('Recorded Session Duration : %0.2f sec', recordedSessionDuration);
 set(handles.text_recordedSessionDuration, 'String', string);
 
-% Setting text for recorded samplinf frequency
+% Setting text for recorded sampling frequency
 string = sprintf('Recorded Sampling Frequency : %0.2f Hz', recordedSamplingFrequency);
 set(handles.text_recordedSamplingFrequency, 'String', string);
 
