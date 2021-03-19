@@ -684,11 +684,11 @@ FileName = strcat(defname, '.xlsx');
 PathName = strcat(pwd, '\LoggedData\');
 copyfile('LogDataTemplate.xlsx',strcat('LoggedData/', defname, '.xlsx'));
 xlswrite([PathName FileName],DAQ_Settings','Sheet1','B4');     %Write data
-xlswrite([PathName FileName],DAQ_Results','Sheet1','E4');      %Write data
-xlswrite([PathName FileName],data,'Sheet1','A24');             %Write data
+xlswrite([PathName FileName],DAQ_Results','Sheet1','B24');      %Write data
+xlswrite([PathName FileName],data,'Sheet1','D4');             %Write data
 
 if(isDataScaling)
-    xlswrite([PathName FileName],scaledDataChannel1','Sheet1','H24');             %Write data
+    xlswrite([PathName FileName],scaledDataChannel1','Sheet1','K4');             %Write data
 end
 
 % 

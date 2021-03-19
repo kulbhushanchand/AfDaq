@@ -1,2 +1,9 @@
+# VSCode
+cache/
+.vscode/
 
-*.xlsx
+# Analysis files
+Analysis/
+
+# Logged data files
+LoggedData/*.xlsx
