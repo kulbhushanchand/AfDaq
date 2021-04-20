@@ -129,6 +129,8 @@ Distributed under the GPLv3 License. See [LICENSE](https://github.com/kulbhushan
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgment
 
+- [MATLAB](https://in.mathworks.com/products/matlab.html)
+- [RStudio](https://www.rstudio.com/)
 - [drawio-desktop](https://github.com/jgraph/drawio-desktop)
 
 
@@ -138,5 +140,5 @@ The project is an open data, open code, and replicable research.
 - The code is available at [GitHub repository](https://github.com/kulbhushanchand/AfDaq).  
 - The code, data, and analysis-scripts that support the findings of the study are available at [OSF Repository](https://doi.org/10.17605/OSF.IO/VCTJM).
 
-The paper explaining the design and development, and usage of this work in multimodal biofeedback is published in xxxx. You can cite this work (by citing the paper published for this work) as below -
+The paper explaining the design and development, and usage of this work in multimodal biofeedback is published in xxxx. You can cite this work (by citing the paper published for this work) as -
 
