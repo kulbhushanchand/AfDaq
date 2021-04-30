@@ -5,5 +5,10 @@ cache/
 # Analysis files
 Analysis/
 
+# Docs and docs-source
+docs/
+docs_source/
+
 # Logged data files
 LoggedData/*.xlsx
+.Rproj.user
