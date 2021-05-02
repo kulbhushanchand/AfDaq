@@ -6,7 +6,7 @@ cache/
 # Analysis/
 
 # Docs and docs-source
-docs/
+#docs/
 docs_source/
 
 # Logged data files

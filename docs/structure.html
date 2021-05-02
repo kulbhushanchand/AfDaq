@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Structure | AfDaq documentation</title>
+  <meta name="description" content="This is the documentation for AfDaq" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Structure | AfDaq documentation" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/assets/images/logo.svg" />
+  <meta property="og:description" content="This is the documentation for AfDaq" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Structure | AfDaq documentation" />
+  
+  <meta name="twitter:description" content="This is the documentation for AfDaq" />
+  <meta name="twitter:image" content="/assets/images/logo.svg" />
+
+<meta name="author" content="Kulbhushan Chand" />
+
+
+<meta name="date" content="2021-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="getting-started.html"/>
+<link rel="next" href="functions-and-variables.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">AfDaq documentation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#developer"><i class="fa fa-check"></i>Developer</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#links"><i class="fa fa-check"></i>Links</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#citation"><i class="fa fa-check"></i>Citation</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#about"><i class="fa fa-check"></i><b>1.1</b> About the project</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#built-with"><i class="fa fa-check"></i><b>1.2</b> Built with</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#features"><i class="fa fa-check"></i><b>1.3</b> Features</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#why-another-acquisition-program"><i class="fa fa-check"></i><b>1.4</b> Why another acquisition program?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#prerequisites"><i class="fa fa-check"></i><b>2.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#installation-and-running"><i class="fa fa-check"></i><b>2.2</b> Installation and Running</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#gui"><i class="fa fa-check"></i><b>2.3</b> GUI</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Structure</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#directory-structure"><i class="fa fa-check"></i><b>3.1</b> Directory structure</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#dependencies"><i class="fa fa-check"></i><b>3.2</b> Dependencies</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="functions-and-variables.html"><a href="functions-and-variables.html"><i class="fa fa-check"></i><b>4</b> Functions and variables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="functions-and-variables.html"><a href="functions-and-variables.html#functions"><i class="fa fa-check"></i><b>4.1</b> Functions</a></li>
+<li class="chapter" data-level="4.2" data-path="functions-and-variables.html"><a href="functions-and-variables.html#variables"><i class="fa fa-check"></i><b>4.2</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="usage.html"><a href="usage.html"><i class="fa fa-check"></i><b>5</b> Usage</a></li>
+<li class="chapter" data-level="6" data-path="roadmap.html"><a href="roadmap.html"><i class="fa fa-check"></i><b>6</b> Roadmap</a></li>
+<li class="chapter" data-level="7" data-path="changelog.html"><a href="changelog.html"><i class="fa fa-check"></i><b>7</b> Changelog</a></li>
+<li class="chapter" data-level="8" data-path="contribute.html"><a href="contribute.html"><i class="fa fa-check"></i><b>8</b> Contributing</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="contribute.html"><a href="contribute.html#how-to-contribute"><i class="fa fa-check"></i><b>8.1</b> How to contribute?</a></li>
+<li class="chapter" data-level="8.2" data-path="contribute.html"><a href="contribute.html#code-of-conduct"><i class="fa fa-check"></i><b>8.2</b> Code of Conduct</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">AfDaq documentation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="structure" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Structure</h1>
+<hr />
+<div id="directory-structure" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Directory structure</h2>
+<p>The main directory structure (with files) is shown below.</p>
+<pre><code>.
+│   .gitignore
+│   AcqRunningGuiFormat.m
+│   AcqStoppedGuiFormat.m
+│   AfDaq.fig
+│   AfDaq.m
+│   Arduino.m
+│   CalculateResults.m
+│   CODE_OF_CONDUCT.md
+│   DefaultSettings.m
+│   Help.fig
+│   Help.m
+│   InitializeGui.m
+│   InitializeVariables.m
+│   LICENSE
+│   LogDataTemplate.xlsx
+│   NumberOfActiveChannels.m
+│   README.md
+│   scratchpad.m
+│
+├───Analysis
+│       jitter_calculation.m
+│
+├───docs
+│
+├───docs_source
+│
+└───LoggedData
+        20200618151224Sub1.xlsx</code></pre>
+<p>An overview of what each of these does is described in the following tables.</p>
+<table>
+<caption><span id="tab:core-directory">Table 3.1: </span> Description of core files/folders</caption>
+<colgroup>
+<col width="9%" />
+<col width="90%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>FILE / DIRECTORY</strong></th>
+<th><strong>DESCRIPTION</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>AcqRunningGuiFormat.m</code></td>
+<td>Function file that defines the state of the GUI when data acquisition is running.</td>
+</tr>
+<tr class="even">
+<td><code>AcqStoppedGuiFormat.m</code></td>
+<td>Function file that defines the state of the GUI when data acquisition is stopped.</td>
+</tr>
+<tr class="odd">
+<td><code>AfDaq.fig</code></td>
+<td>Design file that holds the layout of the GUI. It is created by <code>GUIDE</code>. It is required if further changes to GUI are needed. It is programmatically created by <code>GUIDE</code> and should not be modified outside the <code>GUIDE</code> environment. The <code>AfDaq</code> can be started by opening this file.</td>
+</tr>
+<tr class="even">
+<td><code>AfDaq.m</code></td>
+<td>Function file that holds the callback functions and/or the user-defined functions which define the logic to interact with GUI. It is programmatically created by <code>GUIDE</code> during the first run and later modified by <code>GUIDE</code> as per changes in <code>AfDaq.fig</code>. The <code>AfDaq</code> can be started by executing this file from the editor window.</td>
+</tr>
+<tr class="odd">
+<td><code>Arduino.m</code></td>
+<td>Function file that defines the logic to connect with the <code>Arduino</code> board.</td>
+</tr>
+<tr class="even">
+<td><code>CalculateResults.m</code></td>
+<td>Function file that calculates the final results like recorded session duration, sampling frequency, number of samples, and data quality.</td>
+</tr>
+<tr class="odd">
+<td><code>DefaultSettings.m</code></td>
+<td>Function file to hold the default settings of the GUI.</td>
+</tr>
+<tr class="even">
+<td><code>Help.fig</code></td>
+<td>Design file that holds the layout of the help GUI.</td>
+</tr>
+<tr class="odd">
+<td><code>Help.m</code></td>
+<td>Function file that holds the callback functions of the help GUI.</td>
+</tr>
+<tr class="even">
+<td><code>InitializeGui.m</code></td>
+<td>Function file that initializes the GUI to a default state.</td>
+</tr>
+<tr class="odd">
+<td><code>InitializeVariables.m</code></td>
+<td>Function file that initializes variable to their default state.</td>
+</tr>
+<tr class="even">
+<td><code>LogDataTemplate.xlsx</code></td>
+<td>Excel file that is used as a template to fill data during logging.</td>
+</tr>
+<tr class="odd">
+<td><code>NumberOfActiveChannels.m</code></td>
+<td>Function file to compute the number of active channels used for data acquisition.</td>
+</tr>
+<tr class="even">
+<td><code>Analysis/jitter_calculation.m</code></td>
+<td>Function file used to compute and analyze the jitter associated with the data acquisition.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:optional-directory">Table 3.2: </span> Description of optional files/folders</caption>
+<colgroup>
+<col width="23%" />
+<col width="76%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>FILE / DIRECTORY</strong></th>
+<th><strong>DESCRIPTION</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.gitignore</code></td>
+<td>File used by <code>git</code> to ignore specific files/folders from version control.</td>
+</tr>
+<tr class="even">
+<td><code>CODE_OF_CONDUCT.md</code></td>
+<td>File defining the code of conduct for contributions.</td>
+</tr>
+<tr class="odd">
+<td><code>LICENSE</code></td>
+<td>File defining the terms and conditions of license for this project.</td>
+</tr>
+<tr class="even">
+<td><code>README.md</code></td>
+<td>File defining a short introduction to the project.</td>
+</tr>
+<tr class="odd">
+<td><code>scratchpad.m</code></td>
+<td>File used as temporary code storage/testing.</td>
+</tr>
+<tr class="even">
+<td><code>docs/</code></td>
+<td>Documentation folder</td>
+</tr>
+<tr class="odd">
+<td><code>docs_source/</code></td>
+<td>Source of documentation. The <code>bookdown</code> package in <code>R</code> is used to create the documentation.</td>
+</tr>
+<tr class="even">
+<td><code>LoggedData</code></td>
+<td>Folder where data is saved during logging. If not exists, this folder is automatically created during the logging process.</td>
+</tr>
+<tr class="odd">
+<td><code>LoggedData/20200618151224Sub1.xlsx</code></td>
+<td>File with logged data provided for example purpose.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="dependencies" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Dependencies</h2>
+<p>Here discussed what functions and scripts <code>AfDaq</code> is dependent upon. The <a href="https://in.mathworks.com/help/matlab/ref/matlab.codetools.requiredfilesandproducts.html"><code>[fList,pList] = matlab.codetools.requiredFilesAndProducts('AfDaq.fig');</code></a> function is used to generate the list of dependencies.</p>
+<p><strong>List of MathWorks products possibly required</strong></p>
+<ul>
+<li><code>MATLAB - ver.9.3</code><br />
+</li>
+<li><code>Control System Toolbox - ver.10.3</code><br />
+</li>
+<li><code>Data Acquisition Toolbox - ver.3.12</code></li>
+<li><code>Instrument Control Toolbox - ver.3.12</code></li>
+</ul>
+<p><strong>List of user-authored MATLAB program files required</strong></p>
+<pre><code>&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\ArduinoConstants.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\BaseClass.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\BluetoothDeviceTypeEnum.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\BluetoothHostTransportLayer.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\BoardInfo.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\ConnectionTypeEnum.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\LinuxUtility.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\MWProtocol.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\MacUtility.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\ProtocolBase.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\ResourceManager.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\SerialHostTransportLayer.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\TCPHostTransportLayer.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\TabCompletionHelper.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\TransportLayerBase.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\Utility.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\UtilityCreator.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\WiFiEncryptionTypeEnum.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\WiFiStatusEnum.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\WindowsUtility.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\encode.p&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\endsWith.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\getDefaultLibraryPropertyValue.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\getFullLibraryList.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\getLibraryClassName.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\isICTInstalled.p&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\localizedError.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\renderArrayOfIntsToCharVector.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\renderCellArrayOfCharVectorsToCharVector.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\searchDefaultPropertyValue.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\validateDigitalParameter.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\validateDoubleParameterRanged.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\validateInputPin.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\validateIntArrayParameterRanged.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+internal\validateIntParameterRanged.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\+setup\+internal\HardwareInterface.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\AddonBase.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\FilePath.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\IDERoot.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\LibraryBase.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\PackageRoot.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\SPPKGRoot.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\Servo.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\ServoMotorBase.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\i2cdev.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\rotaryEncoder.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\shiftRegister.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\+arduinoio\spidev.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\@arduino\arduino.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\matlab\hardware\supportpackages\arduinoio\listArduinoLibraries.m&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\realtime\targets\arduinoide\+ide\+internal\getArduinoIDERootDir.p&#39;
+&#39;C:\ProgramData\MATLAB\SupportPackages\R2017b\toolbox\realtime\targets\arduinoide\+ide\+internal\getArduinoSAMRootDir.p&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\AcqRunningGuiFormat.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\AcqStoppedGuiFormat.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\AfDaq.fig&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\AfDaq.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\Arduino.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\CalculateResults.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\DefaultSettings.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\Help.fig&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\Help.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\InitializeGui.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\InitializeVariables.m&#39;
+&#39;C:\Users\Kulbhushan\Documents\My-Projects\AfDaq\NumberOfActiveChannels.m&#39;</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functions-and-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["docs.pdf", "docs.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
