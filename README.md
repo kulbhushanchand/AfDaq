@@ -128,23 +128,25 @@ Please note that this project is released with a [Contributor Code of Conduct](h
 This project is distributed under the `GPLv3` License. See [LICENSE](https://github.com/kulbhushanchand/AfDaq/blob/master/LICENSE) for more information.
 
 
-<!-- CONTACT -->
-## Contact
-
-[Kulbhushan Chand](https://kulbhushanchand.github.io/about/)
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgment
-
-- [RStudio](https://www.rstudio.com/) is used for statistical analysis and visualizations.
-- [drawio-desktop](https://github.com/jgraph/drawio-desktop) is used to create logo and diagrams.
-
-
-## Citation?
+## Citation
 
 This software code is a part of the open-source project [**AfDaq: An Open-source MATLAB-based Real-time Multi-channel Data Acquisition Tool for Biofeedback and Arduino-based Instruments**](https://doi.org/10.17605/OSF.IO/VCTJM). The paper explaining the design and development, and usage of this work in multimodal biofeedback is published in [**Journal of Information Technology Research (JITR)**](). You can cite this work (by citing the paper published for this work) as -
 
 ```
 In press
 ```
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgment
+
+I would like to thank my PhD supervisor [Prof. Arun Khosla](https://www.nitj.ac.in/index.php/nitj_cinfo/Faculty/38) at Dr B R Ambedkar National Institute of Technology for his guidance and kind support. I also want to acknowledge the open-source tools used in some parts of this project.
+
+- [RStudio](https://www.rstudio.com/) is used for statistical analysis and visualizations.
+- [drawio-desktop](https://github.com/jgraph/drawio-desktop) is used to create logo and diagrams.
+
+
+<!-- CONTACT -->
+## Contact
+
+[Kulbhushan Chand](https://kulbhushanchand.github.io/about/)
