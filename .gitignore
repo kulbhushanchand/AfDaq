@@ -3,12 +3,12 @@ cache/
 .vscode/
 
 # Analysis files
-Analysis/
+# Analysis/
 
 # Docs and docs-source
 docs/
 docs_source/
 
 # Logged data files
-LoggedData/*.xlsx
+# LoggedData/*.xlsx
 .Rproj.user
