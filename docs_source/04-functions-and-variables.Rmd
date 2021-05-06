@@ -1,0 +1,62 @@
+# Functions and variables {#functions-and-variables}
+
+---
+
+
+## Functions
+
+The following list of functions is available. Each of these functions is placed in individual `.m` files (See brief description in Table \@ref(tab:core-directory)). Additionally, the `AfDaq.m` file includes different callback functions associated with different sub-components of the GUI. These are self-explanatory with a brief explanation given in the function file itself.
+
+Table: (\#tab:functions) List of available functions
+
+| SYNTAX                                                     |
+|------------------------------------------------------------|
+| `AcqRunningGuiFormat(handles)`                             |
+| `AcqStoppedGuiFormat(handles)`                             |
+| `varargout = AfDaq(varargin)`                              |
+| `Arduino(handles,string)`                                  |
+| `CalculateResults(handles)`                                |
+| `DefaultSettings(handles)`                                 |
+| `varargout = Help(varargin)`                               |
+| `InitializeGui(eventdata,handles)`                         |
+| `InitializeVariables(handles)`                             |
+| `numberOfActiveChannels = NumberOfActiveChannels(handles)` |
+
+
+## Variables
+
+The following variables are available in 3 categories. The variable names are self-explanatory.
+
+Table: (\#tab:variables) List of available variables
+
+| Settings                          | Data                             | Flags                     |
+|-----------------------------------|----------------------------------|---------------------------|
+| `settings_daqDateTime`            | `data_timeStampsRaw`             | `flags_isDataScaling`     |
+| `settings_sessionDate`            | `data_timeStampsMsec`            | `flags_isChannel1Running` |
+| `settings_sessionTime`            | `data_rawDataChannel1`           | `flags_isChannel2Running` |
+| `settings_customId`               | `data_rawDataChannel2`           | `flags_isChannel3Running` |
+| `settings_sessionId`              | `data_rawDataChannel3`           | `flags_isChannel4Running` |
+| `settings_sessionDuration`        | `data_rawDataChannel4`           | `flags_isChannel5Running` |
+| `settings_samplingFrequency`      | `data_rawDataChannel5`           |                           |
+| `settings_samplingTimeInterval`   | `data_scaledDataChannel1`        |                           |
+| `setting_scrollPlotWidth`         | `data_recordedSessionDuration`   |                           |
+| `settings_rightOffset`            | `data_recordedSamplingFrequency` |                           |
+| `settings_scalingFunction`        | `data_recordedNumberOfSamples`   |                           |
+| `settings_numberOfSamples`        | `data_dataQuality`               |                           |
+| `settings_numberOfActiveChannels` | `data_sampleNumber`              |                           |
+| `settings_channel1Type`           |                                  |                           |
+| `settings_channel1Pin`            |                                  |                           |
+| `settings_channel2Type`           |                                  |                           |
+| `settings_channel2Pin`            |                                  |                           |
+| `settings_channel3Type`           |                                  |                           |
+| `settings_channel3Pin`            |                                  |                           |
+| `settings_channel4Type`           |                                  |                           |
+| `settings_channel4Pin`            |                                  |                           |
+| `settings_channel5Type`           |                                  |                           |
+| `settings_channel5Pin`            |                                  |                           |
+| `settings_yMinValue`              |                                  |                           |
+| `settings_yMaxValue`              |                                  |                           |
+| `settings_statusMsg`              |                                  |                           |
+
+
+

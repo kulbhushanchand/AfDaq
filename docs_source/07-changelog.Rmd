@@ -1,0 +1,10 @@
+# Changelog {#changelog}
+
+---
+
+You can check all the releases on the [GitHub release page](https://github.com/kulbhushanchand/AfDaq/releases).
+
+
+**1.0.0**  `2021-04-20`  
+
+>This is the first stable release and was used in the academic paper submitted for peer review.

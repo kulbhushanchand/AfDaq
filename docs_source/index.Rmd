@@ -1,0 +1,65 @@
+--- 
+title: "AfDaq documentation"
+author: "Kulbhushan Chand"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: This is the documentation for AfDaq
+cover-image: assets/images/logo.svg
+---
+
+# Preface {#preface -}
+
+---
+
+```{r fig.align='center', echo=FALSE, out.width = '25%'}
+knitr::include_graphics('assets/images/logo.svg')
+```
+
+<p align="center">
+  <h2 align="center">Arduino Firmata Data Acquisition (AfDaq)</h2>
+  <p align="center">
+    A plug and play MATLAB based tool for biofeedback and Arduino based instruments    
+  </p>
+</p>
+
+
+## Developer {#developer -}
+
+[**Kulbhushan Chand**](https://kulbhushanchand.github.io/about/)  
+*Ph.D. Research Scholar*  
+*Emerging Technologies Lab*  
+*Department of Electronics and Communication Engineering*  
+*[Dr B R Ambedkar National Institute of Technology](http://www.nitj.ac.in/)*  
+*Jalandhar, India*  
+
+
+## Links {#links -}
+
+This project is open data, open code, and replicable research.  
+
+- The code is available at [**GitHub repository**](https://github.com/kulbhushanchand/AfDaq). 
+  - Browse source code at https://github.com/kulbhushanchand/AfDaq 
+  - Download from release page at https://github.com/kulbhushanchand/AfDaq/releases   
+  - Report a bug at https://github.com/kulbhushanchand/AfDaq/issues 
+  
+In case you are interested in the research, design, and development of this software, the code, data, and analysis scripts that support the findings of the study are available at [**OSF Repository**](https://doi.org/10.17605/OSF.IO/VCTJM).
+
+
+## License {#license -}
+
+This project is distributed under the `GPLv3` License. See [LICENSE](https://github.com/kulbhushanchand/AfDaq/blob/master/LICENSE) for more information.
+
+
+## Citation {#citation -}
+
+This software code is a part of the open-source project [**AfDaq: An Open-source MATLAB-based Real-time Multi-channel Data Acquisition Tool for Biofeedback and Arduino-based Instruments**](https://doi.org/10.17605/OSF.IO/VCTJM). The paper explaining the design and development, and usage of this work in multimodal biofeedback is published in [**Journal of Information Technology Research (JITR)**](). You can cite this work (by citing the paper published for this work) as -
+
+```
+citation
+```
