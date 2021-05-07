@@ -27,6 +27,7 @@
   - [Installation and Running](#installation-and-running)
 - [Usage](#usage)
   - [Examples](#examples)
+- [Documentation](#documentation)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -98,6 +99,12 @@ Use this space to show useful examples of how a project can be used. Additional 
 ### Examples
 
 To be added.
+
+
+<!-- DOCUMENTATION -->
+## Documentation
+
+The documentation is available at https://kulbhushanchand.github.io/AfDaq/
 
 
 <!-- ROADMAP -->
