@@ -140,7 +140,13 @@ This project is distributed under the `GPLv3` License. See [LICENSE](https://git
 This software code is a part of the open-source project [**AfDaq: An Open-source MATLAB-based Real-time Multi-channel Data Acquisition Tool for Biofeedback and Arduino-based Instruments**](https://doi.org/10.17605/OSF.IO/VCTJM). The paper explaining the design and development, and usage of this work in multimodal biofeedback is published in [**Journal of Information Technology Research (JITR)**](). You can cite this work (by citing the paper published for this work) as -
 
 ```
-In press
+
+Chand, K., & Khosla, A. (2022). MATLAB-Based Real-Time Data Acquisition Tool for Multimodal Biofeedback and Arduino-Based Instruments: Arduino Firmata Data Acquisition (AfDaq). Journal of Information Technology Research (JITR), 15(1), 1–20. https://doi.org/10.4018/JITR.299922
+
+OSF | AfDaq: An Open-source MATLAB based Real-time Multi-channel Data Acquisition Tool for Biofeedback and Arduino based Instruments. (n.d.). Retrieved September 15, 2022, from https://osf.io/vctjm/
+
+Chand, K. (2021). Kulbhushanchand/AfDaq [MATLAB]. https://github.com/kulbhushanchand/AfDaq (Original work published 2019)
+
 ```
 
 
